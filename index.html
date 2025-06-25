@@ -703,6 +703,12 @@
             const nextSection = document.getElementById(`section${sectionNumber}`);
             nextSection.style.display = 'block';
             
+            // Scroll to top of the page
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
             setTimeout(() => {
                 nextSection.classList.add('visible');
                 if (sectionNumber === 4) {
