@@ -476,6 +476,19 @@
             z-index: 10;
         }
         
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
         .photo {
             width: 100%;
             height: 100%;
@@ -818,7 +831,7 @@
                 <!-- Hearts will be added by JavaScript -->
             </div>
             
-            <button class="nav-btn" onclick="showPhotoGallery()" style="margin-top: 2rem;">Our Beautiful Moments 📸</button>
+            <button class="nav-btn" onclick="console.log('Button clicked!'); showPhotoGallery();" style="margin-top: 2rem;">Our Beautiful Moments 📸</button>
         </div>
         <!-- Section 6: Photo Collage -->
         <div class="section photo-collage-section" id="section6" style="display: none;">
@@ -826,32 +839,32 @@
             
             <div class="photo-collage">
                 <div class="photo-frame frame-1">
-                    <img src="photo1.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">📸</div>
                     <div class="photo-caption">Ethar Days</div>
                 </div>
                 
                 <div class="photo-frame frame-2">
-                    <img src="photo2.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">💕</div>
                     <div class="photo-caption">Adventures Together</div>
                 </div>
                 
                 <div class="photo-frame frame-3">
-                    <img src="photo3.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">💍</div>
                     <div class="photo-caption">The Proposal</div>
                 </div>
                 
                 <div class="photo-frame frame-4">
-                    <img src="photo4.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">👰</div>
                     <div class="photo-caption">Our Wedding Day</div>
                 </div>
                 
                 <div class="photo-frame frame-5">
-                    <img src="photo5.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">✨</div>
                     <div class="photo-caption">Perfect Moments</div>
                 </div>
                 
                 <div class="photo-frame frame-6">
-                    <img src="photo6.jpg" alt="Our Beautiful Memory" class="photo">
+                    <div class="photo-placeholder">💖</div>
                     <div class="photo-caption">Every Day Love</div>
                 </div>
             </div>
@@ -949,31 +962,45 @@
         
         // Show photo gallery function
         function showPhotoGallery() {
-            console.log('Show photo gallery clicked'); // Debug
+            console.log('showPhotoGallery function called'); // Debug
             
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-                section.classList.remove('visible');
-            });
-            
-            // Show photo gallery section
-            const photoSection = document.getElementById('section6');
-            if (photoSection) {
-                photoSection.style.display = 'block';
-                
-                // Scroll to top
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+            try {
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    console.log('Hiding section:', section.id); // Debug
+                    section.style.display = 'none';
+                    section.classList.remove('visible');
                 });
                 
-                setTimeout(() => {
-                    photoSection.classList.add('visible');
-                    animatePhotos();
-                }, 300);
-            } else {
-                console.error('Photo section not found!');
+                // Show photo gallery section
+                const photoSection = document.getElementById('section6');
+                console.log('Photo section found:', photoSection); // Debug
+                
+                if (photoSection) {
+                    console.log('Showing photo section'); // Debug
+                    photoSection.style.display = 'block';
+                    
+                    // Scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        photoSection.classList.add('visible');
+                        console.log('Added visible class to photo section'); // Debug
+                        animatePhotos();
+                    }, 300);
+                } else {
+                    console.error('Photo section (section6) not found!');
+                    // Let's check what sections exist
+                    console.log('Available sections:');
+                    document.querySelectorAll('.section').forEach(section => {
+                        console.log('- ', section.id);
+                    });
+                }
+            } catch (error) {
+                console.error('Error in showPhotoGallery:', error);
             }
         }
         
